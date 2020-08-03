@@ -1,0 +1,834 @@
+package Aplica;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import Clases.Libro;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+/**
+ * @author ALDANA 
+ */
+public class frmRegistro extends javax.swing.JFrame {
+
+    Libro objLi;
+    DefaultListModel moLibro, moEditorial, moClase, moAño, moPaginas, moCosto;
+    DefaultListModel moEstadisticas;
+
+    public frmRegistro() {
+        initComponents();
+        cargaModelos();
+        this.setLocationRelativeTo(this);
+        this.setSize(new Dimension(633,520));
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/book.png")).getImage());
+    }
+
+    void cargaModelos() {
+        moLibro = new DefaultListModel();
+        moEditorial = new DefaultListModel();
+        moClase = new DefaultListModel();
+        moAño = new DefaultListModel();
+        moPaginas = new DefaultListModel();
+        moCosto = new DefaultListModel();
+        moEstadisticas = new DefaultListModel();
+        lstLibro.setModel(moLibro);
+        lstEditorial.setModel(moEditorial);
+        lstClase.setModel(moClase);
+        lstAño.setModel(moAño);
+        lstPaginas.setModel(moPaginas);
+        lstCosto.setModel(moCosto);
+        lstEstadisticas.setModel(moEstadisticas);
+    }
+
+    void llenaModelos() {
+        moLibro.addElement(objLi.getNombre());
+        moEditorial.addElement(objLi.getEditorial());
+        moClase.addElement(objLi.getClase());
+        moAño.addElement(objLi.getAño());
+        moPaginas.addElement(objLi.getPaginas());
+        moCosto.addElement(objLi.getCosto());
+    }
+
+    String getLibro() {
+        return txtLibro.getText();
+    }
+
+    String getEditorial() {
+        return String.valueOf(cboEditorial.getSelectedItem());
+    }
+
+    String getClase() {
+        return String.valueOf(cboClase.getSelectedItem());
+    }
+
+    int getAño() {
+        return Integer.parseInt(txtAño.getText());
+    }
+
+    int getPaginas() {
+        return Integer.parseInt(txtPaginas.getText());
+    }
+
+    double getCosto() {
+        return Double.parseDouble(txtCosto.getText());
+    }
+
+    public class validaNumeros extends Exception {
+
+        public validaNumeros() {
+            super("Ingrese solo Numeros");
+        }
+
+        public validaNumeros(String valor) {
+            super(valor);
+        }
+    }
+
+    String validarNum(char c) throws validaNumeros {
+                
+        if (Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE) {            
+            return "Numero Valido";
+        } else {
+            throw new validaNumeros();
+        }
+        
+    }
+    
+    String validarNumDecimales(char c) throws validaNumeros {
+                
+        if (Character.isDigit(c) || c == KeyEvent.VK_PERIOD || c == KeyEvent.VK_BACK_SPACE) {
+            return "Numero Valido";            
+        } else {            
+            throw new validaNumeros();
+        }
+    }
+    
+    public class validaLetras extends Exception {
+
+        public validaLetras() {
+            super("Ingrese solo Letras");
+        }
+
+        public validaLetras(String valor) {
+            super(valor);
+        }
+    }
+    
+    String validarLetr(char c) throws validaLetras {
+                        
+        if (Character.isDigit(c)) {
+            throw new validaLetras();            
+        }
+        return "Letra valida";
+    }   
+    
+    public class validaAños extends Exception {
+
+        public validaAños() {
+            super("Ingrese un Año Valido");
+        }
+
+        public validaAños(String valor) {
+            super(valor);
+        }
+    }
+    
+    String validarAño(int tam, int n) throws validaAños {
+                
+        if (tam != 4 || n > 2020) {
+            throw new validaAños();            
+        }
+        return "Año Valido";
+    }
+    
+    public class validaPaginas extends Exception {
+
+        public validaPaginas() {
+            super("Ingrese un numero de Paginas");
+        }
+
+        public validaPaginas(String valor) {
+            super(valor);
+        }
+    }
+    
+    String validarPagina(int tam) throws validaPaginas {
+                
+        if (tam < 10 || tam > 5000) {
+            throw new validaPaginas();            
+        }
+        return "Paginas Validas";
+    }    
+
+    public class validaCosto extends Exception {
+
+        public validaCosto() {
+            super("Ingrese un costo diferente");
+        }
+
+        public validaCosto(String valor) {
+            super(valor);
+        }
+    }
+    
+    String validarCosto(double cost) throws validaCosto {
+                
+        if (cost <= 0.0 || cost > 1000.0) {
+            throw new validaCosto();            
+        }
+        return "Costo Valido";
+    }     
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtLibro = new javax.swing.JTextField();
+        txtAño = new javax.swing.JTextField();
+        txtPaginas = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
+        cboEditorial = new javax.swing.JComboBox<>();
+        cboClase = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstLibro = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstAño = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lstPaginas = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lstCosto = new javax.swing.JList<>();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        lstEditorial = new javax.swing.JList<>();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        lstClase = new javax.swing.JList<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        btnEstadisticas = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lstEstadisticas = new javax.swing.JList<>();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registro de Libros");
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(184, 148, 53));
+        jPanel1.setLayout(null);
+
+        jLabel1.setFont(new java.awt.Font("Gill Sans Ultra Bold", 1, 30)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Registro de Libros");
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(70, 10, 460, 30);
+
+        txtLibro.setBackground(new java.awt.Color(97, 184, 158));
+        txtLibro.setForeground(new java.awt.Color(0, 0, 0));
+        txtLibro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtLibro.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "<<Nombre del Libro>>", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtLibro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtLibroKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtLibro);
+        txtLibro.setBounds(20, 60, 400, 60);
+
+        txtAño.setBackground(new java.awt.Color(97, 184, 158));
+        txtAño.setForeground(new java.awt.Color(0, 0, 0));
+        txtAño.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAño.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Año de Ediciòn", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtAño.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAñoFocusLost(evt);
+            }
+        });
+        txtAño.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAñoKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAñoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAñoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtAño);
+        txtAño.setBounds(20, 130, 140, 60);
+
+        txtPaginas.setBackground(new java.awt.Color(97, 184, 158));
+        txtPaginas.setForeground(new java.awt.Color(0, 0, 0));
+        txtPaginas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPaginas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "<Paginas>", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtPaginas.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPaginasFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtPaginasFocusLost(evt);
+            }
+        });
+        txtPaginas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPaginasActionPerformed(evt);
+            }
+        });
+        txtPaginas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPaginasKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtPaginas);
+        txtPaginas.setBounds(170, 130, 120, 60);
+
+        txtCosto.setBackground(new java.awt.Color(97, 184, 158));
+        txtCosto.setForeground(new java.awt.Color(0, 0, 0));
+        txtCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCosto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "<<Costo>>", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        txtCosto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCostoFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCostoFocusLost(evt);
+            }
+        });
+        txtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCostoKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtCosto);
+        txtCosto.setBounds(300, 130, 120, 60);
+
+        cboEditorial.setBackground(new java.awt.Color(97, 184, 158));
+        cboEditorial.setForeground(new java.awt.Color(0, 0, 0));
+        cboEditorial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "A", "B", "C" }));
+        cboEditorial.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "<<Tipo Editorial>>", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        cboEditorial.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cboEditorialFocusGained(evt);
+            }
+        });
+        cboEditorial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cboEditorialMouseClicked(evt);
+            }
+        });
+        cboEditorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboEditorialActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cboEditorial);
+        cboEditorial.setBounds(450, 130, 160, 60);
+
+        cboClase.setBackground(new java.awt.Color(97, 184, 158));
+        cboClase.setForeground(new java.awt.Color(0, 0, 0));
+        cboClase.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Programacion", "Analisis", "Diseño" }));
+        cboClase.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "<<Clase Libro>>", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        cboClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboClaseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cboClase);
+        cboClase.setBounds(450, 60, 160, 60);
+
+        lstLibro.setBackground(new java.awt.Color(97, 184, 158));
+        lstLibro.setForeground(new java.awt.Color(0, 0, 0));
+        lstLibro.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lstLibro);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(30, 340, 160, 139);
+
+        lstAño.setBackground(new java.awt.Color(97, 184, 158));
+        lstAño.setForeground(new java.awt.Color(0, 0, 0));
+        lstAño.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lstAño);
+
+        jPanel1.add(jScrollPane2);
+        jScrollPane2.setBounds(190, 340, 50, 139);
+
+        lstPaginas.setBackground(new java.awt.Color(97, 184, 158));
+        lstPaginas.setForeground(new java.awt.Color(0, 0, 0));
+        lstPaginas.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(lstPaginas);
+
+        jPanel1.add(jScrollPane4);
+        jScrollPane4.setBounds(240, 340, 80, 139);
+
+        lstCosto.setBackground(new java.awt.Color(97, 184, 158));
+        lstCosto.setForeground(new java.awt.Color(0, 0, 0));
+        lstCosto.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(lstCosto);
+
+        jPanel1.add(jScrollPane5);
+        jScrollPane5.setBounds(320, 340, 80, 139);
+
+        lstEditorial.setBackground(new java.awt.Color(97, 184, 158));
+        lstEditorial.setForeground(new java.awt.Color(0, 0, 0));
+        lstEditorial.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane6.setViewportView(lstEditorial);
+
+        jPanel1.add(jScrollPane6);
+        jScrollPane6.setBounds(400, 340, 80, 139);
+
+        lstClase.setBackground(new java.awt.Color(97, 184, 158));
+        lstClase.setForeground(new java.awt.Color(0, 0, 0));
+        lstClase.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane7.setViewportView(lstClase);
+
+        jPanel1.add(jScrollPane7);
+        jScrollPane7.setBounds(480, 340, 100, 139);
+
+        jLabel2.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Clase");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(490, 320, 80, 20);
+
+        jLabel3.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Nombre del Libro");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(30, 320, 160, 20);
+
+        jLabel4.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Año");
+        jPanel1.add(jLabel4);
+        jLabel4.setBounds(190, 320, 50, 20);
+
+        jLabel5.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Paginas");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(240, 320, 80, 20);
+
+        jLabel6.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Costo");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(320, 320, 80, 20);
+
+        jLabel7.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Editorial");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(400, 320, 80, 20);
+
+        jPanel2.setBackground(new java.awt.Color(31, 132, 56));
+
+        btnEstadisticas.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
+        btnEstadisticas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/result.png"))); // NOI18N
+        btnEstadisticas.setText("Estadisticas");
+        btnEstadisticas.setContentAreaFilled(false);
+        btnEstadisticas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnEstadisticas.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnEstadisticas.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnEstadisticas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadisticasActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/loading.png"))); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.setContentAreaFilled(false);
+        btnLimpiar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnLimpiar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnRegistrar.setFont(new java.awt.Font("DialogInput", 0, 10)); // NOI18N
+        btnRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/list.png"))); // NOI18N
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.setContentAreaFilled(false);
+        btnRegistrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrar.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(btnEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEstadisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel2);
+        jPanel2.setBounds(130, 208, 330, 92);
+
+        jPanel3.setBackground(new java.awt.Color(97, 184, 158));
+
+        jLabel8.setFont(new java.awt.Font("Britannic Bold", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(107, 98, 74));
+        jLabel8.setText("Estadisticas:");
+
+        lstEstadisticas.setBackground(new java.awt.Color(97, 184, 158));
+        lstEstadisticas.setForeground(new java.awt.Color(0, 0, 0));
+        lstEstadisticas.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(lstEstadisticas);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 543, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(10, 500, 590, 140);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEstadisticasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadisticasActionPerformed
+        try {
+            moEstadisticas.clear();
+            moEstadisticas.addElement("Numero de Libro de Análisis de la Editorial B es: " + objLi.getTAnalisis());
+            int mayor = Integer.MIN_VALUE;
+            int pos = 0;
+            for (int i = 0; i < moLibro.getSize(); i++) {
+                if (Integer.parseInt(moAño.elementAt(i).toString()) > mayor) {
+                    mayor = Integer.parseInt(moAño.elementAt(i).toString());
+                    pos = i;
+                }
+            }
+            moEstadisticas.addElement("Libro con el año de edición más reciente: " + moLibro.getElementAt(pos));
+            int menor = Integer.MAX_VALUE;
+            for (int i = 0; i < moLibro.getSize(); i++) {
+                if (Integer.parseInt(moPaginas.elementAt(i).toString()) < menor) {
+                    menor = Integer.parseInt(moPaginas.elementAt(i).toString());
+                    pos = i;
+                }
+            }
+            moEstadisticas.addElement("Editorial con libro de menor pagina es: " + moEditorial.getElementAt(pos));
+            double mayorCosto = Double.MIN_VALUE;
+            for (int i = 0; i < moLibro.getSize(); i++) {
+                if (Double.parseDouble(moCosto.elementAt(i).toString()) > mayorCosto) {
+                    mayorCosto = Double.parseDouble(moCosto.elementAt(i).toString());
+                    pos = i;
+                }
+            }
+            moEstadisticas.addElement("Libro con mayor costo es:  " + moLibro.getElementAt(pos));
+            this.setSize(new Dimension(633,700));
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No hay ningun libro registrado");
+        }
+
+    }//GEN-LAST:event_btnEstadisticasActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        try {
+            objLi = new Libro(getLibro(), getEditorial(), getClase(), getAño(), getPaginas(), getCosto());
+            llenaModelos();
+            btnRegistrar.setEnabled(false);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Ingrese todos los datos");
+        }
+
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtAño.setText("");
+        txtCosto.setText("");
+        txtLibro.setText("");
+        txtPaginas.setText("");
+        cboClase.setSelectedIndex(0);
+        cboEditorial.setSelectedIndex(0);
+        btnRegistrar.setEnabled(true);
+        moEstadisticas.clear();
+        txtLibro.requestFocus();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void txtAñoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAñoKeyTyped
+        try {
+            char c = evt.getKeyChar();
+            String valida = validarNum(c);
+        } catch (validaNumeros ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtAñoKeyTyped
+
+    private void txtAñoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAñoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAñoKeyPressed
+
+    private void txtAñoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAñoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAñoKeyReleased
+
+    private void txtPaginasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPaginasKeyTyped
+        try {
+            char c = evt.getKeyChar();
+            String valida = validarNum(c);
+        } catch (validaNumeros ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPaginasKeyTyped
+
+    private void txtLibroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLibroKeyTyped
+        try {
+            char c = evt.getKeyChar();
+            String validar = validarLetr(c);
+        } catch (validaLetras ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtLibroKeyTyped
+
+    private void txtCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCostoKeyTyped
+        try {
+            char c = evt.getKeyChar();
+            String valida = validarNumDecimales(c);
+        } catch (validaNumeros ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCostoKeyTyped
+
+    private void txtAñoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAñoFocusLost
+
+    }//GEN-LAST:event_txtAñoFocusLost
+
+    private void txtPaginasFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPaginasFocusLost
+
+    }//GEN-LAST:event_txtPaginasFocusLost
+
+    private void txtCostoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCostoFocusLost
+
+    }//GEN-LAST:event_txtCostoFocusLost
+
+    private void txtPaginasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPaginasFocusGained
+        try {
+            int tam = txtAño.getText().length();
+            int n = Integer.parseInt(txtAño.getText().trim());
+            String valida = validarAño(tam,n);
+        } catch (validaAños ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            txtAño.requestFocus();
+        }
+    }//GEN-LAST:event_txtPaginasFocusGained
+
+    private void txtCostoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCostoFocusGained
+        try {
+            int n = Integer.parseInt(txtPaginas.getText().trim());
+            String valida = validarPagina(n);
+        } catch (validaPaginas ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            txtPaginas.requestFocus();
+        }
+    }//GEN-LAST:event_txtCostoFocusGained
+
+    private void cboEditorialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cboEditorialMouseClicked
+
+    }//GEN-LAST:event_cboEditorialMouseClicked
+
+    private void txtPaginasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaginasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPaginasActionPerformed
+
+    private void cboClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboClaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboClaseActionPerformed
+
+    private void cboEditorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboEditorialActionPerformed
+
+    }//GEN-LAST:event_cboEditorialActionPerformed
+
+    private void cboEditorialFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cboEditorialFocusGained
+        try {
+            double n = Double.parseDouble(txtCosto.getText().trim());
+            String valida = validarCosto(n);
+        } catch (validaCosto ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            txtCosto.requestFocus();
+        }
+    }//GEN-LAST:event_cboEditorialFocusGained
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(frmRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(frmRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(frmRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(frmRegistro.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new frmRegistro().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEstadisticas;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JComboBox<String> cboClase;
+    private javax.swing.JComboBox<String> cboEditorial;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JList<String> lstAño;
+    private javax.swing.JList<String> lstClase;
+    private javax.swing.JList<String> lstCosto;
+    private javax.swing.JList<String> lstEditorial;
+    private javax.swing.JList<String> lstEstadisticas;
+    private javax.swing.JList<String> lstLibro;
+    private javax.swing.JList<String> lstPaginas;
+    private javax.swing.JTextField txtAño;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtLibro;
+    private javax.swing.JTextField txtPaginas;
+    // End of variables declaration//GEN-END:variables
+}
